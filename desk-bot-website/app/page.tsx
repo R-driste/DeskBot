@@ -27,7 +27,6 @@ function PlusBackground() {
   );
 }
 
-//some ai help here
 function AsciiHero() {
   const COUNT = 4000;
   const [now, setNow] = useState(() => Date.now());
@@ -66,12 +65,12 @@ function AsciiHero() {
         return (
           <span
             key={i}
-            className="inline-block text-[20px] select-none whitespace-nowrap"
+            className="inline-block text-[14px] sm:text-[20px] select-none whitespace-nowrap"
             style={{
               fontFamily: "monospace",
               opacity: isBlinking ? 1 : 0.2,
               color: isBlinking ? "#00FFAE" : "white",
-              padding: "2px 12px",
+              padding: "2px 8px",
             }}
           >
             {isBlinking ? FACE_BLINK[s.idx] : FACE_OPEN[s.idx]}
@@ -91,7 +90,6 @@ const fakeProjects = [
   { name: "Chess Coach", author: "@arjun", desc: "A bot that watches my chess board via camera and suggests the best move.", img: "chessexample.webp" },
 ];
 
-//got ai help here
 function ProjectScroller() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -122,15 +120,15 @@ function ProjectScroller() {
   return (
     <div
       ref={scrollRef}
-      className="w-full overflow-x-hidden flex flex-row gap-6"
+      className="w-full overflow-x-hidden flex flex-row gap-4"
       style={{ scrollbarWidth: "none" }}
     >
       {doubled.map((p, i) => (
         <div
           key={i}
-          className="flex-shrink-0 flex flex-col gap-3 p-6 rounded-lg cursor-pointer"
+          className="flex-shrink-0 flex flex-col gap-3 p-4 sm:p-6 rounded-lg cursor-pointer"
           style={{
-            width: "280px",
+            width: "220px",
             border: "2px solid #00FFAE",
             backgroundColor: "#1a3fa0",
             transition: "transform 0.2s ease, box-shadow 0.2s ease",
@@ -144,15 +142,10 @@ function ProjectScroller() {
             (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
           }}
         >
-          <img
-            src={p.img}
-            alt={p.name}
-            className="w-full object-contain rounded"
-            style={{ height: "100px" }}
-          />
-          <p className={`${pixel.className} text-xl text-white`}>{p.name}</p>
-          <p className={`${sans.className} text-sm font-normal`} style={{ color: "#00FFAE" }}>{p.author}</p>
-          <p className={`${sans.className} text-base text-white opacity-80 leading-relaxed`}>{p.desc}</p>
+          <img src={p.img} alt={p.name} className="w-full object-contain rounded" style={{ height: "80px" }} />
+          <p className={`${pixel.className} text-base text-white`}>{p.name}</p>
+          <p className={`${sans.className} text-xs font-normal`} style={{ color: "#00FFAE" }}>{p.author}</p>
+          <p className={`${sans.className} text-sm text-white opacity-80 leading-relaxed`}>{p.desc}</p>
         </div>
       ))}
     </div>
@@ -168,7 +161,7 @@ const steps = [
 ];
 
 const faqs = [
-  { q: "What is Hack Club?", a: "Hack Club is a global nonprofit network of high school coding clubs and makers. Learn more at hackclub.com" },
+  { q: "What is Hack Club?", a: "hackclub" },
   { q: "Who can apply?", a: "Any Hack Club member 13-18!" },
   { q: "What are the requirements?", a: "Your scripts and STEP files for the robot frame should be easily available for GitHub for review along with a description." },
   { q: "Does it use AI?", a: "We strongly encourage you to create the assistant yourself. However, if you do use AI, it must count for a minimal portion of your application and be explicitly expressed." },
@@ -182,20 +175,18 @@ export default function Home() {
       style={{ backgroundColor: "#2654D3" }}
     >
       <PlusBackground />
-      <div className="absolute top-0 left-0 z-50 overflow-hidden" style={{ width: "300px", height: "140px" }}>
-        <a
-          href="https://hackclub.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+      <div className="absolute top-0 left-0 z-50 overflow-hidden" style={{ width: "180px", height: "110px" }}>
+        <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer">
           <img
             src="/odyarm.png"
             alt="Hack Club"
-            className="w-60 h-auto"
+            className="h-auto"
             style={{
+              width: "180px",
               transformOrigin: "50% 0%",
               animation: "swing 2s ease-in-out infinite",
-              marginTop: "-25px",
+              marginTop: "-20px",
             }}
           />
         </a>
@@ -207,28 +198,36 @@ export default function Home() {
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
         <AsciiHero />
-        <div
-          className={`${pixel.className} relative z-10 flex flex-col items-center justify-center text-center gap-1`}
-        >
-          <p className="text-3xl sm:text-[100px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
+        <div className={`${pixel.className} relative z-10 flex flex-col items-center justify-center text-center gap-1 px-4`}>
+          <p
+            className="tracking-widest leading-none"
+            style={{ color: "#00FFAE", fontSize: "clamp(1.2rem, 5vw, 100px)" }}
+          >
             IF YOU SHIP A
           </p>
           <h1
-            className="text-7xl sm:text-[150px] font-black text-white leading-none"
-            style={{ textShadow: "4px 4px 0px rgba(0,0,0,0.3)", letterSpacing: "0.04em" }}
+            className="font-black text-white leading-none"
+            style={{
+              textShadow: "4px 4px 0px rgba(0,0,0,0.3)",
+              letterSpacing: "0.04em",
+              fontSize: "clamp(3rem, 12vw, 150px)",
+            }}
           >
             DESKBOT
           </h1>
-          <p className="text-2xl sm:text-[100px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
+          <p
+            className="tracking-widest leading-none"
+            style={{ color: "#00FFAE", fontSize: "clamp(1rem, 4vw, 100px)" }}
+          >
             WE SHIP THE PARTS
           </p>
 
-          <div className="flex flex-row gap-8 mt-12">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8 sm:mt-12">
             <a
               href="https://forms.fillout.com/t/dKsSDqQPikus"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-6 text-2xl text-black rounded-lg transition-transform hover:scale-105"
+              className="px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-2xl text-black rounded-lg transition-transform hover:scale-105"
               style={{ backgroundColor: "#00FFAE" }}
             >
               RSVP
@@ -237,8 +236,8 @@ export default function Home() {
               href="https://forms.fillout.com/t/uT5mAtSxPzus"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-6 text-2xl rounded-lg transition-transform hover:scale-105"
-              style={{ backgroundColor: "transparent", border: "10px solid #00FFAE", color: "#00FFAE" }}
+              className="px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-2xl rounded-lg transition-transform hover:scale-105"
+              style={{ backgroundColor: "transparent", border: "4px solid #00FFAE", color: "#00FFAE" }}
             >
               SUBMIT PROJECT
             </a>
@@ -248,26 +247,26 @@ export default function Home() {
 
       {/* What is a DeskBot section */}
       <div
-        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-8"
+        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-6 sm:p-12 gap-6 sm:gap-8"
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
-        <h2 className={`${pixel.className} text-4xl sm:text-6xl tracking-widest text-white`}>
+        <h2 className={`${pixel.className} text-2xl sm:text-4xl lg:text-6xl tracking-widest text-white`}>
           What is a DeskBot?
         </h2>
-        <div className="grid w-full" style={{ gridTemplateColumns: "2fr 1fr", gap: "3rem" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-[2fr_1fr] w-full gap-8 lg:gap-12">
           <div className="flex flex-col gap-4">
-            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+            <p className={`${sans.className} text-white text-lg sm:text-2xl leading-relaxed opacity-90`}>
               A DeskBot would be a small, programmable robot that lives on your desk and works as your personal assistant. One that's fully designed and built by <span style={{ color: "#00FFAE" }}>you</span>!
             </p>
-            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+            <p className={`${sans.className} text-white text-lg sm:text-2xl leading-relaxed opacity-90`}>
               It could display information, respond to voice commands, react to your environment, play music, track habits, essentially whatever you want to build.
             </p>
-            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+            <p className={`${sans.className} text-white text-lg sm:text-2xl leading-relaxed opacity-90`}>
               You pick the modules, CAD the body, write the code, and we ship you everything you need to bring it to life.
             </p>
           </div>
-          <div className="flex flex-col gap-4">
-            <p className={`${pixel.className} text-xl`} style={{ color: "#00FFAE" }}>What it could include:</p>
+          <div className="flex flex-col gap-3">
+            <p className={`${pixel.className} text-base sm:text-xl`} style={{ color: "#00FFAE" }}>What it could include:</p>
             {[
               "OLED or e-ink display",
               "Microphone + voice recognition",
@@ -277,7 +276,7 @@ export default function Home() {
               "Camera for computer vision",
               "Speaker for audio output",
             ].map((item) => (
-              <p key={item} className={`${sans.className} text-white text-xl opacity-80`}>
+              <p key={item} className={`${sans.className} text-white text-base sm:text-xl opacity-80`}>
                 — {item}
               </p>
             ))}
@@ -287,28 +286,28 @@ export default function Home() {
 
       {/* Scrolling projects section */}
       <div
-        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-8 overflow-hidden"
+        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-6 sm:p-12 gap-6 sm:gap-8 overflow-hidden"
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
-        <h2 className={`${pixel.className} text-4xl sm:text-6xl tracking-widest text-white`}>
+        <h2 className={`${pixel.className} text-2xl sm:text-4xl lg:text-6xl tracking-widest text-white`}>
           What could you build?
         </h2>
-        <p className={`${sans.className} text-white text-xl opacity-70`}>
-          Here are some examples of what a DeskBot could look like — hover to pause. (TOTALLY FAKE @s BTW)
+        <p className={`${sans.className} text-white text-base sm:text-xl opacity-70`}>
+          Here are some examples — hover to pause. (TOTALLY FAKE @s BTW)
         </p>
         <ProjectScroller />
       </div>
 
       {/* How it Works card */}
       <div
-        className="relative z-10 w-[95vw] flex flex-col items-center justify-start p-12 gap-10"
+        className="relative z-10 w-[95vw] flex flex-col items-center justify-start p-6 sm:p-12 gap-8 sm:gap-10"
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
-        <h2 className={`${pixel.className} text-5xl sm:text-6xl tracking-widest text-white`}>
+        <h2 className={`${pixel.className} text-2xl sm:text-4xl lg:text-6xl tracking-widest text-white`}>
           How does it work?
         </h2>
 
-        <div className="grid grid-cols-3 gap-12 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12 w-full">
           {steps.slice(0, 3).map((step) => (
             <div className="relative" key={step.num}>
               <div
@@ -316,20 +315,20 @@ export default function Home() {
                 style={{ backgroundColor: "#1a3fa0", border: "3px solid #1a3fa0", transform: "rotate(2deg)", zIndex: 0 }}
               />
               <div
-                className="relative flex flex-col justify-between p-6 rounded-lg"
-                style={{ backgroundColor: "#c9ffee", minHeight: "280px", zIndex: 1 }}
+                className="relative flex flex-col justify-between p-4 sm:p-6 rounded-lg"
+                style={{ backgroundColor: "#c9ffee", minHeight: "220px", zIndex: 1 }}
               >
                 <img
                   src={`/${step.img}.png`}
                   alt={step.num}
                   className="w-full object-contain rounded"
-                  style={{ maxHeight: "500px", filter: "invert(27%) sepia(94%) saturate(600%) hue-rotate(210deg) brightness(0.8)" }}
+                  style={{ maxHeight: "200px", filter: "invert(27%) sepia(94%) saturate(600%) hue-rotate(210deg) brightness(0.8)" }}
                 />
                 <div>
-                  <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
+                  <p className={`${sans.className} text-base font-normal mb-1`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-4xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-xl sm:text-3xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
@@ -338,7 +337,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-12 w-[66%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 w-full lg:w-[66%]">
           {steps.slice(3).map((step) => (
             <div className="relative" key={step.num}>
               <div
@@ -346,20 +345,20 @@ export default function Home() {
                 style={{ backgroundColor: "#1a3fa0", border: "3px solid #1a3fa0", transform: "rotate(2deg)", zIndex: 0 }}
               />
               <div
-                className="relative flex flex-col justify-between p-6 rounded-lg"
-                style={{ backgroundColor: "#00FFAE", minHeight: "280px", zIndex: 1 }}
+                className="relative flex flex-col justify-between p-4 sm:p-6 rounded-lg"
+                style={{ backgroundColor: "#00FFAE", minHeight: "220px", zIndex: 1 }}
               >
                 <img
                   src={`/${step.img}.png`}
                   alt={step.num}
                   className="w-full object-contain rounded"
-                  style={{ maxHeight: "500px", filter: "invert(27%) sepia(94%) saturate(600%) hue-rotate(210deg) brightness(0.8)" }}
+                  style={{ maxHeight: "200px", filter: "invert(27%) sepia(94%) saturate(600%) hue-rotate(210deg) brightness(0.8)" }}
                 />
                 <div>
-                  <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
+                  <p className={`${sans.className} text-base font-normal mb-1`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-4xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-xl sm:text-3xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
@@ -371,28 +370,35 @@ export default function Home() {
 
       {/* FAQ card */}
       <div
-        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-10"
+        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-6 sm:p-12 gap-8 sm:gap-10"
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
         <h2
-          className={`${pixel.className} text-4xl sm:text-6xl tracking-widest`}
+          className={`${pixel.className} text-2xl sm:text-4xl lg:text-6xl tracking-widest`}
           style={{ color: "#00FFAE" }}
         >
           FAQ
         </h2>
 
-        <div className="flex flex-col gap-12 w-full">
+        <div className="flex flex-col gap-8 sm:gap-12 w-full">
           {faqs.map((faq) => (
             <div
               key={faq.q}
               className="flex flex-col gap-2"
               style={{ borderLeft: "3px solid #00FFAE", paddingLeft: "1.5rem" }}
             >
-              <p className={`${pixel.className} text-2xl sm:text-3xl`} style={{ color: "#00FFAE" }}>
+              <p className={`${pixel.className} text-lg sm:text-2xl lg:text-3xl`} style={{ color: "#00FFAE" }}>
                 {faq.q}
               </p>
-              <p className={`${sans.className} text-white text-xl sm:text-2xl font-normal opacity-80`}>
-                {faq.a}
+              <p className={`${sans.className} text-white text-base sm:text-xl lg:text-2xl font-normal opacity-80`}>
+                {faq.q === "What is Hack Club?" ? (
+                  <>
+                    Hack Club is a global nonprofit network of high school coding clubs and makers. Learn more at{" "}
+                    <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer" style={{ color: "#00FFAE", textDecoration: "underline" }}>
+                      hackclub.com
+                    </a>
+                  </>
+                ) : faq.a}
               </p>
             </div>
           ))}
