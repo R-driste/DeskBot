@@ -1,15 +1,13 @@
 "use client";
 import { Jersey_25, Fira_Sans } from "next/font/google";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 
 const pixel = Jersey_25({ weight: "400", subsets: ["latin"] });
 const sans = Fira_Sans({ weight: ["400", "700", "800"], subsets: ["latin"] });
 
-//bg face sets
 const FACE_OPEN  = ["0_0", ">u<", "@.@", "O_O", "^_^", "o_o", ">.>", "<.<"];
 const FACE_BLINK = ["-_-", ">-<", "@-@", "-_-", "^-^", "-_-", ">->", "<-<"];
 
-//normal background
 function PlusBackground() {
   return (
     <div
@@ -22,14 +20,14 @@ function PlusBackground() {
           className="inline-block px-3 py-2 text-[18px] select-none"
           style={{ color: "#5b8fe8", fontFamily: "monospace", opacity: 0.5 }}
         >
-          x
+          +
         </span>
       ))}
     </div>
   );
 }
 
-//hero background
+//some ai help here
 function AsciiHero() {
   const COUNT = 4000;
   const [now, setNow] = useState(() => Date.now());
@@ -42,9 +40,9 @@ function AsciiHero() {
   const schedules = useMemo(() =>
     Array.from({ length: COUNT }, () => ({
       idx: Math.floor(Math.random() * FACE_OPEN.length),
-      offset: Math.random() * 6000,        //random start offset so they're not all synchronized
-      period: 2000 + Math.random() * 4000, //each face will blink every 2–6s
-      blinkDuration: 600 + Math.random() * 600, //eyes shut for 0.6–1.2s
+      offset: Math.random() * 6000,
+      period: 2000 + Math.random() * 4000,
+      blinkDuration: 600 + Math.random() * 600,
     })),
   []);
 
@@ -84,6 +82,83 @@ function AsciiHero() {
   );
 }
 
+const fakeProjects = [
+  { name: "Orpheus Bot", author: "@zephyr", desc: "A robot that reads out Slack messages and reacts with LED expressions.", img: "orphexample.png" },
+  { name: "Orpheus Bot", author: "@notdristi", desc: "A github history sharing desk robot as Octocat.", img: "catexample.png" },
+  { name: "Focus Pal", author: "@bleeeh", desc: "Pomodoro timer bot with a servo arm that physically blocks your phone.", img: "clockexample.jpg" },
+  { name: "Mood Light", author: "@bob", desc: "Detects your face expression via camera and sets ambient lighting accordingly.", img: "lightexample.webp" },
+  { name: "Plant Buddy", author: "@dristii", desc: "Monitors soil moisture and reminds you when your plants need water via audio.", img: "plantexample.jpg" },
+  { name: "Chess Coach", author: "@arjun", desc: "A bot that watches my chess board via camera and suggests the best move.", img: "chessexample.webp" },
+];
+
+//got ai help here
+function ProjectScroller() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    let animId: number;
+    let paused = false;
+
+    const scroll = () => {
+      if (!paused && el) {
+        el.scrollLeft += 1;
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      animId = requestAnimationFrame(scroll);
+    };
+
+    animId = requestAnimationFrame(scroll);
+    el.addEventListener("mouseenter", () => { paused = true; });
+    el.addEventListener("mouseleave", () => { paused = false; });
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
+  const doubled = [...fakeProjects, ...fakeProjects];
+
+  return (
+    <div
+      ref={scrollRef}
+      className="w-full overflow-x-hidden flex flex-row gap-6"
+      style={{ scrollbarWidth: "none" }}
+    >
+      {doubled.map((p, i) => (
+        <div
+          key={i}
+          className="flex-shrink-0 flex flex-col gap-3 p-6 rounded-lg cursor-pointer"
+          style={{
+            width: "280px",
+            border: "2px solid #00FFAE",
+            backgroundColor: "#1a3fa0",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease",
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(-12px)";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(0,255,174,0.3)";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+            (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
+          }}
+        >
+          <img
+            src={p.img}
+            alt={p.name}
+            className="w-full object-contain rounded"
+            style={{ height: "100px" }}
+          />
+          <p className={`${pixel.className} text-xl text-white`}>{p.name}</p>
+          <p className={`${sans.className} text-sm font-normal`} style={{ color: "#00FFAE" }}>{p.author}</p>
+          <p className={`${sans.className} text-base text-white opacity-80 leading-relaxed`}>{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const steps = [
   { num: "Step 1.", text: "Select the parts you wanna incorporate", img: "step1" },
   { num: "Step 2.", text: "Import their models, CAD them a frame", img: "step2" },
@@ -113,7 +188,7 @@ export default function Home() {
         rel="noopener noreferrer"
         className="absolute top-0 left-0 z-50"
       >
-        <img src="/odyarm.png" alt="Hack Club" className="w-100 h-auto" />
+        <img src="/odyarm.png" alt="Hack Club" className="w-40 h-auto" />
       </a>
 
       {/* Hero card */}
@@ -122,7 +197,6 @@ export default function Home() {
         style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
         <AsciiHero />
-
         <div
           className={`${pixel.className} relative z-10 flex flex-col items-center justify-center text-center gap-1`}
         >
@@ -138,13 +212,87 @@ export default function Home() {
           <p className="text-2xl sm:text-[100px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
             WE SHIP THE PARTS
           </p>
+
+          <div className="flex flex-row gap-8 mt-12">
+            <a
+              href="https://forms.fillout.com/t/dKsSDqQPikus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-6 text-2xl text-black rounded-lg transition-transform hover:scale-105"
+              style={{ backgroundColor: "#00FFAE" }}
+            >
+              RSVP
+            </a>
+            <a
+              href="https://forms.fillout.com/t/uT5mAtSxPzus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-6 text-2xl rounded-lg transition-transform hover:scale-105"
+              style={{ backgroundColor: "transparent", border: "10px solid #00FFAE", color: "#00FFAE" }}
+            >
+              SUBMIT PROJECT
+            </a>
+          </div>
         </div>
+      </div>
+
+      {/* What is a DeskBot section */}
+      <div
+        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-8"
+        style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
+      >
+        <h2 className={`${pixel.className} text-4xl sm:text-6xl tracking-widest text-white`}>
+          What is a DeskBot?
+        </h2>
+        <div className="grid w-full" style={{ gridTemplateColumns: "2fr 1fr", gap: "3rem" }}>
+          <div className="flex flex-col gap-4">
+            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+              A DeskBot would be a small, programmable robot that lives on your desk and works as your personal assistant. One that's fully designed and built by <span style={{ color: "#00FFAE" }}>you</span>!
+            </p>
+            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+              It could display information, respond to voice commands, react to your environment, play music, track habits, essentially whatever you want to build.
+            </p>
+            <p className={`${sans.className} text-white text-2xl leading-relaxed opacity-90`}>
+              You pick the modules, CAD the body, write the code, and we ship you everything you need to bring it to life.
+            </p>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className={`${pixel.className} text-xl`} style={{ color: "#00FFAE" }}>What it could include:</p>
+            {[
+              "OLED or e-ink display",
+              "Microphone + voice recognition",
+              "RGB LEDs or NeoPixels",
+              "Wi-Fi / Bluetooth module",
+              "Servo motors for movement",
+              "Camera for computer vision",
+              "Speaker for audio output",
+            ].map((item) => (
+              <p key={item} className={`${sans.className} text-white text-xl opacity-80`}>
+                — {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scrolling projects section */}
+      <div
+        className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-8 overflow-hidden"
+        style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
+      >
+        <h2 className={`${pixel.className} text-4xl sm:text-6xl tracking-widest text-white`}>
+          What could you build?
+        </h2>
+        <p className={`${sans.className} text-white text-xl opacity-70`}>
+          Here are some examples of what a DeskBot could look like — hover to pause. (TOTALLY FAKE @s BTW)
+        </p>
+        <ProjectScroller />
       </div>
 
       {/* How it Works card */}
       <div
         className="relative z-10 w-[95vw] flex flex-col items-center justify-start p-12 gap-10"
-        style={{ border: "2px solid #00FFAE" }}
+        style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
         <h2 className={`${pixel.className} text-5xl sm:text-6xl tracking-widest text-white`}>
           How does it work?
@@ -159,7 +307,7 @@ export default function Home() {
               />
               <div
                 className="relative flex flex-col justify-between p-6 rounded-lg"
-                style={{ backgroundColor: "#00FFAE", minHeight: "280px", zIndex: 1 }}
+                style={{ backgroundColor: "#c9ffee", minHeight: "280px", zIndex: 1 }}
               >
                 <img
                   src={`/${step.img}.png`}
@@ -211,10 +359,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Placeholder FAQ card */}
+      {/* FAQ card */}
       <div
         className="relative z-10 w-[95vw] flex flex-col items-start justify-start p-12 gap-10"
-        style={{ border: "2px solid #00FFAE" }}
+        style={{ border: "2px solid #00FFAE", backgroundColor: "#2654D3" }}
       >
         <h2
           className={`${pixel.className} text-4xl sm:text-6xl tracking-widest`}
