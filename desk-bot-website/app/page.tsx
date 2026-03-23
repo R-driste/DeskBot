@@ -31,7 +31,7 @@ function PlusBackground() {
 
 //hero background
 function AsciiHero() {
-  const COUNT = 2000;
+  const COUNT = 4000;
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function AsciiHero() {
         return (
           <span
             key={i}
-            className="inline-block text-[50px] select-none whitespace-nowrap"
+            className="inline-block text-[20px] select-none whitespace-nowrap"
             style={{
               fontFamily: "monospace",
               opacity: isBlinking ? 1 : 0.2,
@@ -87,7 +87,7 @@ function AsciiHero() {
 const steps = [
   { num: "Step 1.", text: "Select the parts you wanna incorporate", img: "step1" },
   { num: "Step 2.", text: "Import their models, CAD them a frame", img: "step2" },
-  { num: "Step 3.", text: "Program the modules to create your assistant", img: "step3" },
+  { num: "Step 3.", text: "Program modules into your assistant", img: "step3" },
   { num: "Step 4.", text: "Submit your files on GitHub and Slack", img: "step4" },
   { num: "Step 5.", text: "Once done, we ship you what you need", img: "step5" },
 ];
@@ -126,16 +126,16 @@ export default function Home() {
         <div
           className={`${pixel.className} relative z-10 flex flex-col items-center justify-center text-center gap-1`}
         >
-          <p className="text-3xl sm:text-[150px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
+          <p className="text-3xl sm:text-[100px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
             IF YOU SHIP A
           </p>
           <h1
-            className="text-7xl sm:text-[250px] font-black text-white leading-none"
+            className="text-7xl sm:text-[150px] font-black text-white leading-none"
             style={{ textShadow: "4px 4px 0px rgba(0,0,0,0.3)", letterSpacing: "0.04em" }}
           >
             DESKBOT
           </h1>
-          <p className="text-2xl sm:text-[150px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
+          <p className="text-2xl sm:text-[100px] tracking-widest leading-none" style={{ color: "#00FFAE" }}>
             WE SHIP THE PARTS
           </p>
         </div>
@@ -146,7 +146,7 @@ export default function Home() {
         className="relative z-10 w-[95vw] flex flex-col items-center justify-start p-12 gap-10"
         style={{ border: "2px solid #00FFAE" }}
       >
-        <h2 className={`${pixel.className} text-4xl sm:text-6xl tracking-widest text-white`}>
+        <h2 className={`${pixel.className} text-5xl sm:text-6xl tracking-widest text-white`}>
           How does it work?
         </h2>
 
@@ -171,7 +171,7 @@ export default function Home() {
                   <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-5xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-4xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
@@ -201,7 +201,7 @@ export default function Home() {
                   <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-5xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-4xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
