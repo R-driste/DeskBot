@@ -152,6 +152,14 @@ function ProjectScroller() {
   );
 }
 
+const stepColors = [
+  "#e0fff5", //very light
+  "#b3ffe6",
+  "#66ffd0",
+  "#33ffbc",
+  "#00FFAE", //full green
+];
+
 const steps = [
   { num: "Step 1.", text: "Select the parts you wanna incorporate", img: "step1" },
   { num: "Step 2.", text: "Import their models, CAD them a frame", img: "step2" },
@@ -176,7 +184,7 @@ export default function Home() {
     >
       <PlusBackground />
 
-      <div className="absolute top-0 left-0 z-50 overflow-hidden" style={{ width: "180px", height: "110px" }}>
+      <div className="absolute top-0 left-0 z-50 overflow-hidden" style={{ width: "300px", height: "110px" }}>
         <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer">
           <img
             src="/odyarm.png"
@@ -316,7 +324,7 @@ export default function Home() {
               />
               <div
                 className="relative flex flex-col justify-between p-4 sm:p-6 rounded-lg"
-                style={{ backgroundColor: "#c9ffee", minHeight: "220px", zIndex: 1 }}
+                style={{ backgroundColor: stepColors[steps.indexOf(step)], minHeight: "220px", zIndex: 1 }}
               >
                 <img
                   src={`/${step.img}.png`}
@@ -346,7 +354,7 @@ export default function Home() {
               />
               <div
                 className="relative flex flex-col justify-between p-4 sm:p-6 rounded-lg"
-                style={{ backgroundColor: "#00FFAE", minHeight: "220px", zIndex: 1 }}
+                style={{ backgroundColor: stepColors[steps.indexOf(step)], minHeight: "220px", zIndex: 1 }}
               >
                 <img
                   src={`/${step.img}.png`}
