@@ -84,10 +84,10 @@ function AsciiHero() {
 
 const fakeProjects = [
   { name: "Orpheus Bot", author: "@zephyr", desc: "A robot that reads out Slack messages and reacts with LED expressions.", img: "orphexample.png" },
-  { name: "Orpheus Bot", author: "@notdristi", desc: "A github history sharing desk robot as Octocat.", img: "catexample.png" },
-  { name: "Focus Pal", author: "@bleeeh", desc: "Pomodoro timer bot with a servo arm that physically blocks your phone.", img: "clockexample.jpg" },
+  { name: "Omnicat", author: "@notdristi", desc: "A github history sharing desk robot as Octocat.", img: "catexample.png" },
+  { name: "Focusing Friend", author: "@bleeeh", desc: "Pomodoro timer bot with a servo arm that physically blocks your phone.", img: "clockexample.jpg" },
   { name: "Mood Light", author: "@bob", desc: "Detects your face expression via camera and sets ambient lighting accordingly.", img: "lightexample.webp" },
-  { name: "Plant Buddy", author: "@dristii", desc: "Monitors soil moisture and reminds you when your plants need water via audio.", img: "plantexample.jpg" },
+  { name: "Planthehe", author: "@dristii", desc: "Monitors soil moisture and reminds you when your plants need water via audio.", img: "plantexample.jpg" },
   { name: "Chess Coach", author: "@arjun", desc: "A bot that watches my chess board via camera and suggests the best move.", img: "chessexample.webp" },
 ];
 
@@ -168,8 +168,8 @@ const steps = [
 ];
 
 const faqs = [
-  { q: "What is it?", a: "A desktop robot that can tend to your needs. Design it to your liking and we send you the parts to build." },
-  { q: "Who can apply?", a: "Any Hack Club member!" },
+  { q: "What is Hack Club?", a: "Hack Club is a global nonprofit network of high school coding clubs and makers. Learn more at hackclub.com" },
+  { q: "Who can apply?", a: "Any Hack Club member 13-18!" },
   { q: "What are the requirements?", a: "Your scripts and STEP files for the robot frame should be easily available for GitHub for review along with a description." },
   { q: "Does it use AI?", a: "We strongly encourage you to create the assistant yourself. However, if you do use AI, it must count for a minimal portion of your application and be explicitly expressed." },
   { q: "How many will be shipped?", a: "TBD!" },
@@ -182,14 +182,24 @@ export default function Home() {
       style={{ backgroundColor: "#2654D3" }}
     >
       <PlusBackground />
-      <a
-        href="https://hackclub.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-0 left-0 z-50"
-      >
-        <img src="/odyarm.png" alt="Hack Club" className="w-40 h-auto" />
-      </a>
+      <div className="absolute top-0 left-0 z-50 overflow-hidden" style={{ width: "300px", height: "140px" }}>
+        <a
+          href="https://hackclub.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/odyarm.png"
+            alt="Hack Club"
+            className="w-60 h-auto"
+            style={{
+              transformOrigin: "50% 0%",
+              animation: "swing 2s ease-in-out infinite",
+              marginTop: "-25px",
+            }}
+          />
+        </a>
+      </div>
 
       {/* Hero card */}
       <div

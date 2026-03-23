@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* for orph */
+@keyframes swing {
+  0%   { transform: rotate(-15deg); }
+  50%  { transform: rotate(15deg); }
+  100% { transform: rotate(-15deg); }
+}
