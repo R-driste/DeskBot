@@ -87,7 +87,7 @@ function AsciiHero() {
 const steps = [
   { num: "Step 1.", text: "Select the parts you wanna incorporate", img: "step1" },
   { num: "Step 2.", text: "Import their models, CAD them a frame", img: "step2" },
-  { num: "Step 3.", text: "Program modules into your assistant", img: "step3" },
+  { num: "Step 3.", text: "Program the modules to create your assistant", img: "step3" },
   { num: "Step 4.", text: "Submit your files on GitHub and Slack", img: "step4" },
   { num: "Step 5.", text: "Once done, we ship you what you need", img: "step5" },
 ];
@@ -171,7 +171,7 @@ export default function Home() {
                   <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-6xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-5xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
@@ -201,7 +201,7 @@ export default function Home() {
                   <p className={`${sans.className} text-xl font-normal mb-2`} style={{ color: "rgba(0,0,0,0.45)" }}>
                     {step.num}
                   </p>
-                  <p className={`${sans.className} text-6xl font-extrabold text-black leading-snug`}>
+                  <p className={`${sans.className} text-5xl font-extrabold text-black leading-snug`}>
                     {step.text}
                   </p>
                 </div>
